@@ -70,10 +70,13 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`\n🚀 Server running on http://localhost:${PORT}`);
-  console.log(`📅 Event: OPTICPHOTONSUMMIT2026`);
-  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}\n`);
-});
+// Only start server if not in Vercel serverless environment
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`\n🚀 Server running on http://localhost:${PORT}`);
+    console.log(`📅 Event: OPTICPHOTONSUMMIT2026`);
+    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}\n`);
+  });
+}
 
 module.exports = app;
